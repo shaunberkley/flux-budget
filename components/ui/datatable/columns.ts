@@ -3,7 +3,7 @@ import { labels, priorities, statuses } from "./data/data";
 import type { Task } from "./data/schema";
 import DataTableColumnHeader from "./DataTableColumnHeader.vue";
 import DataTableRowActions from "./DataTableRowActions.vue";
-import Checkbox from "@/components/ui/checkbox/checkbox.vue";
+import Checkbox from "@/components/ui/checkbox/Checkbox.vue";
 import Badge from "@/components/ui/badge/Badge.vue";
 
 export const columns: ColumnDef<Task>[] = [
