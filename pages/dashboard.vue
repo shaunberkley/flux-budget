@@ -157,7 +157,7 @@
                             </CardContent>
                         </Card>
                     </div>
-                    <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+                    <div class="md:grid gap-4 md:grid-cols-2 lg:grid-cols-7">
                         <Card class="col-span-4">
                             <CardHeader>
                                 <CardTitle>Overview</CardTitle>

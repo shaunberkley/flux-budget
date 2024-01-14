@@ -36,10 +36,12 @@
                 <DropdownMenuItem>New Team</DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-                <NuxtLink to="/login"> Log out</NuxtLink>
-                <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-            </DropdownMenuItem>
+            <NuxtLink to="/login">
+                <DropdownMenuItem>
+                    Log out
+                    <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+                </DropdownMenuItem>
+            </NuxtLink>
         </DropdownMenuContent>
     </DropdownMenu>
 </template>
