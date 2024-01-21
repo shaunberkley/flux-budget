@@ -1,6 +1,12 @@
 <script setup lang="ts">
-    import { cn } from "@/lib/utils";
-    import { buttonVariants } from "@/components/ui/button";
+    useHead({
+        title: "Flux Budget | Sign In",
+        meta: [{ name: "description", content: "Sign in to Flux Budget" }],
+    });
+
+    definePageMeta({
+        layout: "unauthenticated",
+    });
 </script>
 
 <template>
