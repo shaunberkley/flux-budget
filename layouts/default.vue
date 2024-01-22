@@ -6,7 +6,7 @@
                 <MainNav class="hidden md:block mx-6" />
                 <div class="ml-auto flex items-center space-x-4">
                     <Search class="hidden md:block" />
-                    <!-- <UserNav /> -->
+                    <UserNav />
                 </div>
             </div>
         </div>

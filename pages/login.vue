@@ -1,4 +1,7 @@
 <script setup lang="ts">
+    import { userProfileStore } from "../store/index";
+    import { useAuthStore } from "../store/auth";
+
     useHead({
         title: "Flux Budget | Sign In",
         meta: [{ name: "description", content: "Sign in to Flux Budget" }],
@@ -6,6 +9,12 @@
 
     definePageMeta({
         layout: "unauthenticated",
+    });
+
+    onMounted(async () => {
+        console.log(userProfileStore().profile, useAuthStore().currentUser);
+        console.log(userProfileStore().profile);
+        if (userProfileStore().profile) navigateTo("/dashboard");
     });
 </script>
 

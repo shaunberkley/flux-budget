@@ -4,32 +4,75 @@
     import { cn } from "@/lib/utils";
 
     const isLoading = ref(false);
-    async function onSubmit(event: Event) {
-        event.preventDefault();
-        isLoading.value = true;
+    const email = ref("");
+    const password = ref("");
+    const showError = ref(false);
+    const errorMsg = ref("");
+    const hideError = () => {
+        showError.value = false;
+    };
 
-        setTimeout(() => {
+    async function signIn(event: Event) {
+        event.preventDefault();
+        console.log(event);
+        try {
+            isLoading.value = true;
+            const { data, error } = await supabase.auth.signInWithPassword({
+                email: email.value,
+                password: password.value,
+            });
+
+            if (error) throw error;
+            // Make sure the session is set before the `auth` middleware runs
+            if (data) {
+                // await supabase.auth.setSession(data.session);
+                await setProfileData(data?.user?.id);
+                console.log("nav");
+                navigateTo("/dashboard");
+            }
+        } catch (e) {
+            const error = e as Error;
+            showError.value = true;
+            errorMsg.value = error.message;
+            console.log(error.message);
+            setTimeout(hideError, 3000);
+        } finally {
             isLoading.value = false;
-            navigateTo("/dashboard");
-        }, 3000);
+        }
+        console.log("sign in");
     }
 </script>
 
 <template>
     <div :class="cn('grid gap-6', $attrs.class ?? '')">
-        <form @submit="onSubmit">
-            <div class="grid gap-2">
-                <div class="grid gap-1">
-                    <Label class="sr-only" for="email"> Email </Label>
-                    <Input
-                        id="email"
-                        placeholder="name@example.com"
-                        type="email"
-                        auto-capitalize="none"
-                        auto-complete="email"
-                        auto-correct="off"
-                        :disabled="isLoading"
-                    />
+        <form @submit="signIn">
+            <div class="grid gap-4">
+                <div class="grid gap-4">
+                    <div>
+                        <Label for="email"> Email </Label>
+                        <Input
+                            id="email"
+                            placeholder="name@example.com"
+                            type="email"
+                            auto-capitalize="none"
+                            auto-complete="email"
+                            auto-correct="off"
+                            v-model="email"
+                            :disabled="isLoading"
+                        />
+                    </div>
+                    <div>
+                        <Label for="password"> Password </Label>
+                        <Input
+                            id="password"
+                            placeholder=""
+                            type="password"
+                            auto-capitalize="none"
+                            auto-correct="off"
+                            v-model="password"
+                            :disabled="isLoading"
+                        />
+                    </div>
                 </div>
                 <Button :disabled="isLoading">
                     <ph-circle-notch
@@ -37,7 +80,7 @@
                         class="mr-2 h-4 w-4 animate-spin"
                         v-if="isLoading"
                     />
-                    Create Account
+                    Log in
                 </Button>
             </div>
         </form>
@@ -57,7 +100,7 @@
                 class="mr-2 h-4 w-4 animate-spin"
                 v-if="isLoading"
             />
-            Log in
+            Create Account
         </Button>
     </div>
 </template>

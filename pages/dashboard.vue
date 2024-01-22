@@ -184,35 +184,45 @@
     import tasks from "@/components/ui/datatable/data/tasks.json";
     import UserNav from "@/components/ui/usernav/UserNav.vue";
     import { columns } from "@/components/ui/datatable/columns";
-    // import { userProfileStore } from "../store";
+    import { userProfileStore } from "../store/index";
+    import { useAuthStore } from "../store/auth";
 
-    // const userProfile = userProfileStore().profile;
+    onMounted(async () => {
+        console.log(userProfileStore().profile);
+        console.log(useAuthStore().currentUser);
+    });
 
-    // try {
-    //     const { data, error } = await supabase
-    //         .from("budget_profile")
-    //         .select(
-    //             `*,
-    //             profiles(
-    //                 *,
-    //                 income_sources(
-    //                     *,
-    //                     income(*)
-    //                 )
-    //             ),
-    //             budgets(
-    //                 *,
-    //                 objectives(
-    //                     *,
-    //                     contributions(*)
-    //                 )
-    //             )
-    //         `
-    //         )
-    //         .eq("profile", userProfile.id);
-    // } catch (error) {
-    //     console.log(error);
-    // }
+    const userProfile = userProfileStore().profile;
+    let dashboardData = ref(null);
+
+    try {
+        const { data, error } = await supabase
+            .from("budget_profile")
+            .select(
+                `*,
+                profiles(
+                    *,
+                    income_sources(
+                        *,
+                        income(*)
+                    )
+                ),
+                budgets(
+                    *,
+                    objectives(
+                        *,
+                        contributions(*)
+                    )
+                )
+            `
+            )
+            .eq("profile", userProfile.id);
+        dashboardData.value = data;
+    } catch (error) {
+        console.log(error);
+    }
+
+    console.log(dashboardData.value);
 
     // const stats = [
     //     {
