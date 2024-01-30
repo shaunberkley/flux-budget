@@ -1,11 +1,11 @@
 import { createClient } from "@supabase/supabase-js";
-import { useRuntimeConfig } from "#app";
 import { userProfileStore } from "../store/index";
 import { useAuthStore } from "../store/auth";
+import type { Database } from "../types/supabase";
 
-const supabaseUrl = "https://faimdolwnjznwqyksnkq.supabase.co";
+const supabaseUrl = "https://kyozgsosnylxasrxivzc.supabase.co";
 const supabaseAnonKey =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZhaW1kb2x3bmp6bndxeWtzbmtxIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODM2Nzg4NjcsImV4cCI6MTk5OTI1NDg2N30.7-3HpslysbQCm5tkTjdwQF0-QMVMAvJIIozBrBjwA7A";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imt5b3pnc29zbnlseGFzcnhpdnpjIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NzI3OTIzMjgsImV4cCI6MTk4ODM2ODMyOH0.o7qyqv1yCTwzIHS905a55vO6bM2F8CbbS9Kri82bIwE";
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
@@ -14,13 +14,7 @@ export async function setProfileData(userId?: string) {
         .from("profiles")
         .select(
             `
-                id,
-                first_name,
-                last_name,
-                email,
-                avatar_url,
-                created_at,
-                updated_at
+                *
             `
         )
         .eq("id", userId ?? useAuthStore().currentUser?.user?.id)

@@ -196,27 +196,12 @@
     let dashboardData = ref(null);
 
     try {
-        const { data, error } = await supabase
-            .from("budget_profile")
-            .select(
-                `*,
-                profiles(
-                    *,
-                    income_sources(
-                        *,
-                        income(*)
-                    )
-                ),
-                budgets(
-                    *,
-                    objectives(
-                        *,
-                        contributions(*)
-                    )
-                )
+        const { data, error } = await supabase.from("companies").select(
+            `*,       
+                notes (*),
+                contacts (*)
             `
-            )
-            .eq("profile", userProfile.id);
+        );
         dashboardData.value = data;
     } catch (error) {
         console.log(error);

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="border-b">
+        <div class="border-b sticky top-0 bg-white">
             <div class="flex h-16 items-center px-4">
                 <TeamSwitcher />
                 <MainNav class="hidden md:block mx-6" />

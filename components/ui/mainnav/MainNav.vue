@@ -9,28 +9,40 @@
         "
     >
         <a
-            href="/examples/dashboard"
+            href="/dashboard"
             class="text-sm font-medium transition-colors hover:text-primary"
         >
-            Overview
+            Dashboard
         </a>
         <a
-            href="/examples/dashboard"
+            href="/companies"
             class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
         >
-            Customers
+            Companies
         </a>
         <a
-            href="/examples/dashboard"
+            href="/contacts"
             class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
         >
-            Products
+            Contacts
         </a>
         <a
-            href="/examples/dashboard"
+            href="/notes"
             class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
         >
-            Settings
+            Notes
+        </a>
+        <a
+            href="/files"
+            class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+        >
+            Files
+        </a>
+        <a
+            href="/listings"
+            class="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+        >
+            Listings
         </a>
     </nav>
 </template>
